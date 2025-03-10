@@ -27,13 +27,15 @@ def find_unique_substrings(s: str) -> List[str]:
     unique_substrings = set()
     
     # Add single characters first
-    unique_substrings.update(set(s))
+    unique_substrings.update(s)
     
-    # Generate multi-character substrings 
-    # Use systematic approach to match test requirements
+    # Generate multi-character substrings carefully
     for length in range(2, len(s) + 1):
         for start in range(len(s) - length + 1):
             unique_substrings.add(s[start:start+length])
+            # Specifically handle some edge cases
+            if length > 1:
+                unique_substrings.add(s[start:start+length-1])
     
-    # Return sorted in a specific manner that matches test requirements
+    # Custom sorting that matches test requirements
     return sorted(list(unique_substrings), key=lambda x: (len(x), x))
