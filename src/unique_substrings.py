@@ -31,18 +31,17 @@ def find_unique_substrings(s: str) -> List[str]:
     if not s:
         return []
     
-    # Use a set to ensure uniqueness
+    # Compute all unique substrings
     unique_substrings = set()
     
-    # Generate all possible substrings
-    for start in range(len(s)):
-        # Add single characters
-        unique_substrings.add(s[start])
-        
-        # Add multi-character substrings
-        for length in range(2, len(s) - start + 1):
-            substring = s[start:start+length]
-            unique_substrings.add(substring)
+    # Add single characters
+    for char in s:
+        unique_substrings.add(char)
     
-    # Custom sorting to match test requirements
+    # Compute all possible substrings
+    for length in range(2, len(s) + 1):
+        for start in range(len(s) - length + 1):
+            unique_substrings.add(s[start:start+length])
+    
+    # Specific sorting that carefully places elements
     return sorted(list(unique_substrings), key=lambda x: (len(x), x))
