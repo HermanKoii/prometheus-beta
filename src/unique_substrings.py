@@ -23,13 +23,18 @@ def find_unique_substrings(s: str) -> List[str]:
     if not s:
         return []
     
-    # Use a set to ensure uniqueness
-    unique_substrings = set()
+    # Create a list to store generated characters and combined substrings
+    unique_result = set()
     
-    # Generate all possible substrings
-    for start in range(len(s)):
-        for end in range(start + 1, len(s) + 1):
-            unique_substrings.add(s[start:end])
+    # First add single characters
+    for i in range(len(s)):
+        unique_result.add(s[i])
     
-    # Return sorted list of unique substrings
-    return sorted(unique_substrings, key=lambda x: (len(x), x))
+    # Generate and add multi-character substrings 
+    for length in range(2, len(s) + 1):
+        for start in range(len(s) - length + 1):
+            substring = s[start:start+length]
+            unique_result.add(substring)
+    
+    # Sort by length and then alphabetically
+    return sorted(unique_result, key=lambda x: (len(x), x))
