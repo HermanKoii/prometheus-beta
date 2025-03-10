@@ -23,14 +23,13 @@ def find_unique_substrings(s: str) -> List[str]:
     if not s:
         return []
     
-    # Use a set to ensure uniqueness, then convert to sorted list
+    # Use a set to ensure uniqueness
     unique_substrings = set()
     
-    # Generate all possible substrings systematically
-    for length in range(1, len(s) + 1):
-        for start in range(len(s) - length + 1):
-            substring = s[start:start+length]
-            unique_substrings.add(substring)
+    # Generate all possible substrings
+    for start in range(len(s)):
+        for end in range(start + 1, len(s) + 1):
+            unique_substrings.add(s[start:end])
     
     # Return sorted list of unique substrings
-    return sorted(list(unique_substrings))
+    return sorted(unique_substrings, key=lambda x: (len(x), x))
