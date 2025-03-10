@@ -40,8 +40,8 @@ def find_unique_substrings(s: str) -> List[str]:
         unique_substrings.add(s[start])
         
         # Add multi-character substrings
-        for end in range(start + 1, len(s) + 1):
-            substring = s[start:end]
+        for length in range(2, len(s) - start + 1):
+            substring = s[start:start+length]
             unique_substrings.add(substring)
     
     # Custom sorting to match test requirements
