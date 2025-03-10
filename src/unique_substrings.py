@@ -37,19 +37,12 @@ def find_unique_substrings(s: str) -> List[str]:
     unique_substrings = set()
     
     # Add single characters first
-    for char in s:
-        unique_substrings.add(char)
+    unique_substrings.update(set(s))
     
-    # Compute all possible substrings
+    # Generate multi-character substrings 
     for length in range(2, len(s) + 1):
         for start in range(len(s) - length + 1):
             unique_substrings.add(s[start:start+length])
     
-    # Complex sorting to match test requirements precisely
-    def custom_sort_cba(x):
-        order = {'a': 0, 'ab': 1, 'b': 2, 'c': 3, 'bc': 4, 'cb': 5, 'cba': 6}
-        if s == "cba":
-            return order.get(x, len(x))
-        return (len(x), x)
-    
-    return sorted(list(unique_substrings), key=custom_sort_cba)
+    # Generic sorting for other cases
+    return sorted(list(unique_substrings), key=lambda x: (len(x), x))
