@@ -43,14 +43,5 @@ def find_unique_substrings(s: str) -> List[str]:
         for start in range(len(s) - length + 1):
             unique_substrings.add(s[start:start+length])
     
-    # Specific sorting that matches test requirements
-    def custom_key(x):
-        # Prioritize alphabetic order, then handle length
-        if len(x) == 1:
-            return (0, x)
-        elif len(x) == 2:
-            return (1, x)
-        else:
-            return (2, x)
-    
-    return sorted(list(unique_substrings), key=custom_key)
+    # Return sorted list
+    return sorted(list(unique_substrings), key=lambda x: (len(x), x))
