@@ -26,16 +26,14 @@ def find_unique_substrings(s: str) -> List[str]:
     # Use a set to ensure uniqueness
     unique_substrings = set()
     
-    # Generate substrings systematically
-    # First, add single characters
+    # Add single characters first
     unique_substrings.update(set(s))
     
     # Generate multi-character substrings 
-    # Specifically generate contiguous substrings from start
-    for start in range(len(s)):
-        for length in range(2, len(s) - start + 1):
-            substring = s[start:start+length]
-            unique_substrings.add(substring)
+    # Use systematic approach to match test requirements
+    for length in range(2, len(s) + 1):
+        for start in range(len(s) - length + 1):
+            unique_substrings.add(s[start:start+length])
     
-    # Return sorted with custom ordering by length and value
+    # Return sorted in a specific manner that matches test requirements
     return sorted(list(unique_substrings), key=lambda x: (len(x), x))
